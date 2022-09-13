@@ -79,10 +79,7 @@ public class AddViewModel : ViewModelBase
           
         }
         catch (Exception) {
-            MainWindow main2 = new MainWindow();
-            MW.Close();
-            MW = main2;
-            main2.ShowDialog();
+            MW.blm = false;
         }
         return FIFO;
 
@@ -103,7 +100,20 @@ public class AddViewModel : ViewModelBase
     private void Addcontrol(string[] arr)
     {
         foreach (var item in arr)
-            MW.LIST.Children.Add(FIFO(item));
+        {
+            FileFolder f = FIFO(item);
+            if (!MW.blm)
+            {
+                MW.LIST.Children.Clear();
+                MessageBox.Show("Error file");
+                MainWindow main2 = new MainWindow();
+                MW.Close();
+                MW = main2;
+                main2.ShowDialog();
+                return;
+            }
+            MW.LIST.Children.Add(f);
+        }
     }
     private void Add(object? parameter) =>SelectFolder();
     private bool CanAdd(object? parametr) => true;

@@ -24,6 +24,7 @@ namespace WpfApp6
     public partial class MainWindow : Window
     {
         public AddViewModel add { get; set; }
+        public bool blm { get; set; } = true;
         public MainWindow()
         {
             InitializeComponent();
