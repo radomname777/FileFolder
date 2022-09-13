@@ -70,11 +70,22 @@ public class AddViewModel : ViewModelBase
         DirectoryInfo d = new DirectoryInfo(name);
         FileFolder FIFO = new FileFolder();
         FIFO.FolderNames = name;
-        FileInfo[] Files = d.GetFiles("*.*");
-        foreach (var item in Files)Lstr.Add(item.FullName);
-        FIFO.Label1.Content = StringMethods(name);
-        FIFO.Margin = new Thickness(10);
+        try
+        {
+            FileInfo[] Files = d.GetFiles("*.*");
+            foreach (var item in Files) Lstr.Add(item.FullName);
+            FIFO.Label1.Content = StringMethods(name);
+            FIFO.Margin = new Thickness(10);
+          
+        }
+        catch (Exception) {
+            MainWindow main2 = new MainWindow();
+            MW.Close();
+            MW = main2;
+            main2.ShowDialog();
+        }
         return FIFO;
+
     }
     private Filex Files(string name)
     {
